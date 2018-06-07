@@ -1,0 +1,21 @@
+{
+  "name": "browserwindow",
+  "version": "1.0.0",
+  "description": "BrowserWindow on electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "BrowserWindow",
+    "Electron",
+    "JavaScript",
+    "DesktopApp"
+  ],
+  "author": "nhantt",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^2.0.2"
+  }
+}

@@ -1,8 +1,22 @@
-const { Menu, app, BrowserWindow } = require('electron');
+const { Menu, MenuItem, ipcMain, app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 
+
 let mainWindow;
+const contextMenu = new Menu();
+contextMenu.append(new MenuItem({label: 'Cut', role: 'cut'}));
+contextMenu.append(new MenuItem({label: 'Copy', role: 'copy'}));
+contextMenu.append(new MenuItem({label: 'Paste', role: 'paste'}));
+contextMenu.append(new MenuItem({label: 'Select All', role: 'selectall'}));
+contextMenu.append(new MenuItem({type:'separator'}));
+contextMenu.append(new MenuItem({label: 'Custom', click(){console.log('Custom Menu')}}));
+
+ipcMain.on('show-context-menu', function(event) {
+    const win = BrowserWindow.fromWebContents(event.sender);
+    contextMenu.popup(win);
+})
+
 let template = [
     {
         label: 'Edit',

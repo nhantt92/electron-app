@@ -68,6 +68,19 @@ ipc.on('save-file-dialog', function (event) {
     })
 });
 
+ipc.on('display-dialog', function(event, dialogType){
+    console.log(dialogType);
+    dialog.showMessageBox({
+        type: dialogType,
+        buttons: ['Save', 'Cancel', 'Don\'t Save'],
+        defaultId: 0,
+        cancelId: 1,
+        title: 'Save Score',
+        message: 'Hellp Dialog Message!',
+        detail: 'Message detail'
+    });
+})
+
 function createWindow() {
     mainWindow = new BrowserWindow({ width: 1024, height: 600 });
     mainWindow.loadFile('index.html');

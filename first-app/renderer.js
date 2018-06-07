@@ -1,0 +1,1 @@
+//javascript of index.html

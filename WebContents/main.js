@@ -1,9 +1,19 @@
-const {app, BrowserWindow, webContents, ipcMain } = require('electron');
+const { app, BrowserWindow, webContents, ipcMain } = require('electron');
+const electron = require('electron');
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
 
 let mainWindow, secondWindow, windowToCapture, windowToPrint;
+
+function getScreenInfo() {
+    let screen = electron.screen;
+    // let currentScreens = screen.getAllDisplays();
+    // console.log('screens', currentScreens);
+    let primatyScreen = screen.getPrimaryDisplay();
+    //console.log('prime', primatyScreen);
+    return screen.getPrimaryDisplay().bounds;
+}
 
 ipcMain.on('capture-window', event => {
     windowToCapture = BrowserWindow.fromId(event.sender.webContents.id);
@@ -69,8 +79,11 @@ function createWindow(fileStr, options) {
 }
 
 app.on('ready', () => {
+    let screenBounds = getScreenInfo();
     mainWindow = createWindow('index.html',{width: 800, height: 600, title: 'MAIN', backgroundColor: '#FFF'});
-    secondWindow = createWindow('index.html', {width: 400, height: 400, title: 'SECOND', backgroundColor: '#FFF'})
+    let newX = screenBounds.width - 600;
+    let newY = screenBounds.height - 600;
+    secondWindow = createWindow('index.html', {x: newX, y: newY, width: 400, height: 400, title: 'SECOND', backgroundColor: '#FFF'})
 });
 
 app.on('window-all-closed', () => {
@@ -80,3 +93,4 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     if(mainWindow === null) createWindow();
 });
+

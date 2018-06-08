@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FirstApp</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Are You Online?</h1>
+            <div class="button-holder">
+                <button id="checkStatusButton" type="button">Check Status</button>
+            </div>
+        </header>
+        <section class="main">
+            <h2 id="h2-online">You are Online</h2>
+            <h2 id="h2-offline">You are NOT Online</h2>
+        </section>
+        <footer></footer>
+    </div>
+    <script>
+        require('./renderer.js');
+    </script>
+</body>
+</html>

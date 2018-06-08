@@ -1,0 +1,16 @@
+{
+  "name": "online-detection-example",
+  "version": "1.0.0",
+  "description": "online-detection with electron ",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nhantt",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^2.0.2",
+    "is-online": "^7.0.0"
+  }
+}

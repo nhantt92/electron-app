@@ -8,7 +8,9 @@ let mainWindow, secondWindow, windowToCapture;
 ipcMain.on('capture-window', event => {
     windowToCapture = BrowserWindow.fromId(event.sender.webContents.id);
     let bounds = windowToCapture.getBounds();
-    windowToCapture.webContents.capturePage({x: 0, y: 0, width: bounds.width, height: bounds.height}, imageCaptured);
+    setTimeout(()=>{
+    windowToCapture.webContents.capturePage({x: 0, y: 0, width: bounds.width, height: bounds.height}, imageCaptured)
+    }, 500);
 });
 
 function imageCaptured(image){
@@ -50,8 +52,8 @@ function createWindow(fileStr, options) {
 }
 
 app.on('ready', () => {
-    mainWindow = createWindow('index.html',{width: 800, height: 600, title: 'MAIN'});
-    secondWindow = createWindow('index.html', {width: 400, height: 400, title: 'SECOND'})
+    mainWindow = createWindow('index.html',{width: 800, height: 600, title: 'MAIN', backgroundColor: '#FFF'});
+    secondWindow = createWindow('index.html', {width: 400, height: 400, title: 'SECOND', backgroundColor: '#FFF'})
 });
 
 app.on('window-all-closed', () => {

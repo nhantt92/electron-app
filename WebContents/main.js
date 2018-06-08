@@ -79,6 +79,7 @@ function createWindow(fileStr, options) {
 }
 
 app.on('ready', () => {
+    console.log(app.getLocale());
     let screenBounds = getScreenInfo();
     mainWindow = createWindow('index.html',{width: 800, height: 600, title: 'MAIN', backgroundColor: '#FFF'});
     let newX = screenBounds.width - 600;

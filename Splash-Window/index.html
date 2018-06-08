@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FirstApp</title>
+</head>
+<body>
+    <h1>Wellcom to FirstApp</h1>
+    Node version: <script>document.write(process.versions.node)</script> <br>
+    Chromium: <script>document.write(process.versions.chrome)</script> <br>
+    Electron: <script>document.write(process.versions.electron)</script> <br>
+    <script>
+        require('./renderer.js');
+    </script>
+</body>
+</html>

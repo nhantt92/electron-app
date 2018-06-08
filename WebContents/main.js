@@ -3,7 +3,7 @@ const path = require('path');
 const url = require('url');
 const fs = require('fs');
 
-let mainWindow, secondWindow, windowToCapture;
+let mainWindow, secondWindow, windowToCapture, windowToPrint;
 
 ipcMain.on('capture-window', event => {
     windowToCapture = BrowserWindow.fromId(event.sender.webContents.id);
@@ -19,6 +19,23 @@ function imageCaptured(image){
     console.log(filePath);
     let png = image.toPNG();
     fs.writeFileSync(filePath, png);
+}
+
+ipcMain.on('print-to-pdf', event => {
+    windowToPrint = BrowserWindow.fromId(event.sender.webContents.id);
+    windowToPrint.webContents.printToPDF({}, pdfCreated);
+});
+
+function pdfCreated(err, data) {
+    let desktop = app.getPath('desktop');
+    let filePath = desktop + '/' + windowToPrint.getTitle() + '-printed.pdf';
+    console.log(filePath);
+    if(err) console.log(err.message);
+    if(data) {
+        fs.writeFile(filePath, data, error => {
+            if(error) console.log(error.message);
+        });
+    }
 }
 
 function createWindow(fileStr, options) {
